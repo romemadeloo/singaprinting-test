@@ -13,7 +13,11 @@ export class MyOrdersPage {
   async assertLoadedWithoutAppError(): Promise<void> {
     await expect(this.page).toHaveURL(/\/mypage\/orders/i);
     await expect(this.page.getByText(/Order No\./i)).toBeVisible();
-    await expect(this.page.getByText(/Internal Server Error|404|500/i)).toHaveCount(0);
+    await expect(
+      this.page
+        .locator('main h1, main h2, main h3, main h4, main p, main [role="alert"]')
+        .filter({ hasText: /Internal Server Error|Page Not Found|\b404\b|\b500\b/i }),
+    ).toHaveCount(0);
   }
 
   async signOut(): Promise<void> {

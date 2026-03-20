@@ -21,6 +21,7 @@ test.describe('Authentication Smoke', () => {
     await guestSession.authModalPage.login(
       `invalid-${Date.now()}@example.com`,
       'wrong-password-do-not-use',
+      { expectSuccess: false },
     );
     await guestSession.authModalPage.assertNotAuthenticated();
   });
