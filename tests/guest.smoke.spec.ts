@@ -83,7 +83,7 @@ test.describe('Guest And Checkout Smoke', () => {
     const postSelectTotal = await checkoutPage.getTotalCost();
 
     expect(expressFee).toBeGreaterThanOrEqual(0);
-    expect(postSelectTotal).toBeGreaterThanOrEqual(standardTotal);
+    expect(postSelectTotal).toBeGreaterThanOrEqual(standardTotal); 
   });
 
   test('P0 @smoke @ui @checkout @prod-safe payment option switch updates visible payment panel', async ({
