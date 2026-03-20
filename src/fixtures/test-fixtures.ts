@@ -12,7 +12,7 @@ import { CheckoutPage } from '../pages/checkout.page';
 import { HomePage } from '../pages/home.page';
 import { MyOrdersPage } from '../pages/my-orders.page';
 import { ProductPage } from '../pages/product.page';
-import { getAuthCredentials } from '../utils/env';
+import { getRequiredAuthCredentials } from '../utils/env';
 
 export type Session = {
   page: Page;
@@ -61,11 +61,8 @@ export const test = base.extend<TestFixtures>({
     await context.addInitScript(antiBotInitScript);
     const page = await context.newPage();
     const session = createSession(page);
-    const credentials = getAuthCredentials();
-
-    if (credentials) {
-      await loginAsMember(page, credentials.email, credentials.password);
-    }
+    const credentials = getRequiredAuthCredentials();
+    await loginAsMember(page, credentials.email, credentials.password);
 
     await use({
       context,

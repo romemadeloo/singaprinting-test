@@ -19,8 +19,16 @@ export function getAuthCredentials(): AuthCredentials | null {
   return { email, password };
 }
 
-export function hasAuthCredentials(): boolean {
-  return getAuthCredentials() !== null;
+export function getRequiredAuthCredentials(): AuthCredentials {
+  const credentials = getAuthCredentials();
+
+  if (!credentials) {
+    throw new Error(
+      'E2E_USER_EMAIL and E2E_USER_PASSWORD are required for authenticated release coverage.',
+    );
+  }
+
+  return credentials;
 }
 
 export function ensureProductionSafeMode(action: string): void {
@@ -31,4 +39,3 @@ export function ensureProductionSafeMode(action: string): void {
     );
   }
 }
-

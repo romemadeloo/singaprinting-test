@@ -1,5 +1,6 @@
 import { expect, type Page } from '@playwright/test';
 
+import { roleFirst } from '../utils/selectors';
 import { gotoAndStabilize } from '../utils/waits';
 
 export class MyOrdersPage {
@@ -16,10 +17,13 @@ export class MyOrdersPage {
   }
 
   async signOut(): Promise<void> {
-    const signOut = this.page.getByRole('link', { name: /Sign Out/i }).first();
+    await roleFirst(this.page, 'link', /My Account/i).click();
+    const signOut = this.page
+      .getByRole('link', { name: /Sign Out/i })
+      .or(this.page.getByText(/Sign Out/i))
+      .first();
     await expect(signOut).toBeVisible();
     await signOut.click();
     await this.page.waitForLoadState('networkidle');
   }
 }
-
