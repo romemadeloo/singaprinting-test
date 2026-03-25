@@ -1,7 +1,7 @@
 import { assertAuthenticatedByOrdersPage, loginAsMember } from '../src/flows/login.flow';
 import { getRequiredAuthCredentials } from '../src/utils/env';
 import { test } from '../src/fixtures/test-fixtures';
-
+ 
 test.describe('Authentication Smoke', () => {
   test('P0 @smoke @p0 @auth @ui @prod-safe login modal renders member flow controls', async ({
     guestSession,
